@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.I.P. // ARQUIVO ANÔMALO v20.0 - 12 SETORES</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="crt-overlay"></div>
+    <div id="horror-overlay" class="horror-glitch-layer"></div>
+
+    <!-- MODAL CENTRALIZADO DA AGÊNCIA -->
+    <div id="modal-notificacao" class="modal-centralizado" style="display: none;">
+        <div class="modal-conteudo">
+            <h2 id="modal-titulo">SISTEMA S.I.P.</h2>
+            <p id="modal-mensagem">Mensagem de teste...</p>
+            <div id="modal-botoes" class="modal-botoes-box">
+                <button id="modal-btn" onclick="fecharModalNotificacao()" class="btn-tool">[ CONTINUAR ]</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TELA 1: CUTSCENE DO JORNAL IMPRESSO -->
+    <div id="tela-jornal" class="jornal-container">
+        <div class="jornal-paper">
+            <div class="jornal-header">
+                <div class="jornal-topo-meta">
+                    <span>EDIÇÃO EXTRAORDINÁRIA</span>
+                    <span>ED. Nº 4.900 // CLASSIFICADO NÍVEL OMEGA</span>
+                    <span>VALOR: CR$ 0,50</span>
+                </div>
+                <h1 class="jornal-titulo">O OBSERVADOR NACIONAL</h1>
+                <div class="jornal-linha-divisoria"></div>
+            </div>
+
+            <div class="jornal-manchete-principal">
+                <h2>CRISE PARANORMAL ESCALA PARA 12 SETORES NACIONAIS E GOVERNO DECRETA ESTADO DE EMERGÊNCIA OMEGA</h2>
+                <div class="jornal-submanchete">Entidades liminares, contágios cognitivos e mutações biológicas desconhecidas exigem 60 protocolos de contenção.</div>
+            </div>
+
+            <div class="jornal-corpo-grid">
+                <div class="jornal-coluna">
+                    <p class="primeira-letra">O</p>
+                    <p>
+                        O que começou com avistamentos isolados em florestas rurais se transformou em um colapso completo da realidade física em doze distritos de contenção. Documentos governamentais vazados indicam que instalações subterrâneas e frequências de transmissão estão sendo infestadas por anomalias de alta gravidade.
+                    </p>
+                    <p>
+                        "As velhas diretrizes não funcionam mais nos setores vermelhos e roxos. O risco de perda de sanidade dos operadores é iminente", alertou um porta-voz da defesa militar.
+                    </p>
+                </div>
+
+                <div class="jornal-coluna">
+                    <div class="jornal-caixa-destaque">
+                        <h3>📋 CONTRATAÇÃO CONFIDENCIAL: AGENTE-709</h3>
+                        <p>
+                            Você foi oficialmente convocado como o **ANALISTA FORENSE SUPREMO (AGENTE-709)** da Agência S.I.P.
+                        </p>
+                        <p>
+                            Sua missão é investigar os **60 casos arquivados nas 12 fases do sistema**, analisar leituras térmicas, filtrar ondas de frequência no laboratório e aplicar o protocolo exato. Um único erro resultará na brecha total de contenção.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jornal-rodape-acao">
+                <button onclick="fecharJornalEIrParaCapa()" class="btn-jornal-continuar">[ ASSINAR TERMO DE POSSE & ACESSAR MATRIZ S.I.P. ]</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TELA 2: CAPA DO JOGO -->
+    <div id="tela-capa" class="lobby-container" style="display: none;">
+        <div class="capa-box">
+            <div class="carimbo-secreto">CONFIDENCIAL // APENAS NÍVEL OMEGA (VOID ABSOLUTO)</div>
+            <h1 class="titulo-capa">S.I.P.</h1>
+            <h2 class="subtitulo-capa">SISTEMA DE INVESTIGAÇÃO PARANORMAL v20.0</h2>
+            <p class="descricao-capa">
+                MATRIZ DE CONTENÇÃO TÁTICA E ANÁLISE FORENSE DE AMEAÇAS ANÔMALAS.<br>
+                12 SETORES DE PERIGO // 60 CASOS CATALOGADOS // CONTROLE DE SANIDADE E BATERIA.
+            </p>
+
+            <div class="lobby-botoes-acao" style="margin-top: 25px;">
+                <button onclick="irParaSeletorFases()" class="btn-iniciar-lobby" style="font-size: 1.1rem; padding: 14px 30px;">▶ SELEÇÃO DE SETOR TÁTICO (12 FASES)</button>
+            </div>
+            
+            <div class="lobby-botoes-acao" style="margin-top: 15px;">
+                <button onclick="iniciarModoSobrevivencia()" class="btn-iniciar-lobby btn-survival">💀 MODO SOBREVIVÊNCIA INFINITO</button>
+                <button onclick="abrirPainelConquistas()" class="btn-tool yellow">🏆 CONQUISTAS</button>
+                <button onclick="confirmarResetGlobal()" class="btn-reset-global">⚠️ RESETAR PROGRESSO</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TELA 3: SELETOR DE FASES (12 FASES) -->
+    <div id="tela-seletor" class="lobby-container" style="display: none; max-width: 1050px;">
+        <div class="capa-box">
+            <h2 class="subtitulo-capa" style="font-size: 1.3rem; color: #33ff66;">SELETOR DE SETORES DE CONTENÇÃO (FASE 1 A 12)</h2>
+            <p class="descricao-capa">
+                SELECIONE UM DOS 12 SETORES PARA INICIAR A VARREDURA FORENSE:
+            </p>
+
+            <div class="fases-lobby-grid" id="grid-12-fases">
+                <!-- Gerado dinamicamente via JS -->
+            </div>
+
+            <div class="lobby-botoes-acao">
+                <button onclick="voltarParaCapa()" class="btn-tool yellow">⬅ VOLTAR PARA A CAPA</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TELA 4: TERMINAL DO JOGO -->
+    <div id="tela-jogo" class="terminal-container" style="display: none;">
+        <header>
+            <div class="logo-box">
+                <h1>S.I.P. // ARQUIVO ANÔMALO v20.0</h1>
+                <p class="subtitle">DEPARTAMENTO DE CONTENÇÃO TÁTICA E FORENSE</p>
+            </div>
+            <div class="status-box">
+                <div>OPERADOR: <span class="highlight">AGENTE-709</span></div>
+                <div>SANIDADE: <span id="sanidade-val" class="highlight-green">100%</span> | BATERIA: <span id="bateria-val" class="highlight-green">100%</span></div>
+                <div>SETOR: <span id="fase-val" class="highlight">FASE 1 (SETOR VERDE)</span></div>
+            </div>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="nav-btn active" onclick="mudarAba('investigacao', event)">📁 CASO ATUAL</button>
+            <button class="nav-btn" onclick="mudarAba('labs', event)">🔬 LABORATÓRIO FORENSE</button>
+            <button class="nav-btn" onclick="mudarAba('interrogatorio', event)">💬 CANAL DE E-MAIL</button>
+            <button class="nav-btn" onclick="mudarAba('evidencias', event)">📌 MURAL DE EVIDÊNCIAS</button>
+            <button class="nav-btn" onclick="mudarAba('dossie', event)">📰 DOSSIÊ TÁTICO</button>
+            <button class="nav-btn btn-danger" onclick="confirmarResetGlobal()">⚠️ RESETAR JOGO</button>
+            <button class="nav-btn btn-voltar" onclick="voltarAoLobby()">🚪 SELETOR DE FASES</button>
+        </nav>
+
+        <main>
+            <!-- ABA 1: INVESTIGAÇÃO DE CASOS -->
+            <section id="aba-investigacao" class="tab-content active">
+                <div class="caso-header">
+                    <h2>RELATÓRIO DE EVIDÊNCIA: <span id="caso-id">#001</span></h2>
+                    <div class="caso-progresso">CASO <span id="caso-idx">1</span> / <span id="caso-total">5</span></div>
+                </div>
+
+                <div class="ferramentas-texto">
+                    <span>MARCADOR DE TEXTO:</span>
+                    <button onclick="setMarcador('suspeito')" class="btn-tool red">SUSPEITO</button>
+                    <button onclick="setMarcador('explicavel')" class="btn-tool green">EXPLICÁVEL</button>
+                    <button onclick="setMarcador('limpar')" class="btn-tool">LIMPAR</button>
+                </div>
+
+                <div id="relatorio-box" class="relatorio-box"></div>
+
+                <div class="diagnostico-container">
+                    <div class="escolha-bloco">
+                        <h3>1. CLASSIFIQUE A ESPÉCIE ANÔMALA:</h3>
+                        <div class="botoes-grid" id="grid-especies">
+                            <button onclick="selecionarEspecie('skinwalker')" class="btn-diag">01. SKINWALKER</button>
+                            <button onclick="selecionarEspecie('creepypasta')" class="btn-diag">02. CREEPYPASTA DIGITAL</button>
+                            <button onclick="selecionarEspecie('espiritual')" class="btn-diag">03. ENTIDADE ESPIRITUAL</button>
+                            <button onclick="selecionarEspecie('criptideo')" class="btn-diag">04. CRÍPTIDO DE CAMPO</button>
+                            <button onclick="selecionarEspecie('liminar')" class="btn-diag">05. ANOMALIA LIMINAR/ESPACIAL</button>
+                            <button onclick="selecionarEspecie('cognitivo')" class="btn-diag">06. CONTAGIO COGNITIVO/MEME</button>
+                            <button onclick="selecionarEspecie('falso')" class="btn-diag btn-safe">07. FALSO ALARME / CAUSA NATURAL</button>
+                        </div>
+                    </div>
+
+                    <div class="escolha-bloco">
+                        <h3>2. SELECIONE O PROTOCOLO TÁTICO DE CONTENÇÃO:</h3>
+                        <div class="botoes-grid" id="grid-protocolos">
+                            <button onclick="selecionarProtocolo('isolamento')" class="btn-diag">A. ISOLAMENTO ACÚSTICO + INCINERADOR</button>
+                            <button onclick="selecionarProtocolo('digital')" class="btn-diag">B. PURGE DE SERVIDOR & FIREWALL PROFUNDO</button>
+                            <button onclick="selecionarProtocolo('quimico')" class="btn-diag">C. VENTILAÇÃO FORÇADA & EVACUAÇÃO MÉDICA</button>
+                            <button onclick="selecionarProtocolo('exorcismo')" class="btn-diag">D. QUARENTENA TÉRMICA & SELAMENTO SALINO</button>
+                            <button onclick="selecionarProtocolo('amnesia')" class="btn-diag">E. BLOQUEADOR AMNÉSICO B-4 & QUARENTENA</button>
+                        </div>
+                    </div>
+
+                    <div class="escolha-bloco">
+                        <h3>3. DECISÃO ÉTICA DA AGÊNCIA S.I.P.:</h3>
+                        <div class="botoes-grid">
+                            <button onclick="finalizarCasoComEtica('verdade')" class="btn-diag btn-safe">DIVULGAR VERDADE À IMPRENSA</button>
+                            <button onclick="finalizarCasoComEtica('acobertar')" class="btn-diag">ACOBERTAR DADOS E SEGUIR ORDENS</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABA 2: LABORATÓRIO FORENSE -->
+            <section id="aba-labs" class="tab-content">
+                <h2>🔬 LABORATÓRIO DE ANÁLISE FORENSE E SINTONIA</h2>
+                <div class="labs-container">
+                    <div class="lab-box">
+                        <h3>MÓDULO 1: DESCRIPTOGRAFIA DE CIFRAS</h3>
+                        <p class="lab-desc">Insira o código de acesso para desbloquear o relatório de dados do caso:</p>
+                        <input type="text" id="input-cifra" placeholder="DIGITE A CIFRA AQUI...">
+                        <button onclick="descriptografarTexto()" class="btn-tool">PROCESSAR CIFRA</button>
+                        <div id="decrypt-log" class="lab-log">Status: Nenhuma cifra enviada.</div>
+                    </div>
+
+                    <div class="lab-box">
+                        <h3>MÓDULO 2: SINTONIZADOR DE ONDA ANÔMALA (MINI-GAME)</h3>
+                        <div class="multimedia-panel">
+                            <canvas id="canvas-audio" width="380" height="110"></canvas>
+                        </div>
+                        <div class="lab-controls">
+                            <label>AJUSTE DE FREQUÊNCIA: <input type="range" id="freq-slider" min="10" max="100" value="50" oninput="atualizarOndaLab()"></label>
+                            <button onclick="sintonizarSinalOnda()" class="btn-tool yellow">SINTONIZAR SINAL DE ÁUDIO (-15% Bateria)</button>
+                            <button onclick="executarAnaliseLab('termica')" class="btn-tool">VARREDURA TÉRMICA (-20% Bateria)</button>
+                            <button onclick="recarregarBateria()" class="btn-tool green">RECARREGAR GERADOR (-10% Sanidade)</button>
+                        </div>
+                        <div id="lab-resultado-log" class="lab-log">Aguardando sintonização de espectro...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABA 3: INTERROGATÓRIO REFORÇADO -->
+            <section id="aba-interrogatorio" class="tab-content">
+                <h2>💬 CANAL SEGURO DE INTERROGATÓRIO TÁTICO</h2>
+                <div class="chat-container">
+                    <div id="chat-historico" class="chat-historico">
+                        <div class="chat-msg sistema">SISTEMA: Canal seguro aberto.</div>
+                    </div>
+                    <div class="chat-inputs">
+                        <button onclick="enviarPerguntaChat('p1')" class="btn-diag">"A criatura mantinha articulação disforme, padrão bípede ou flutuava sem massa?"</button>
+                        <button onclick="enviarPerguntaChat('p2')" class="btn-diag">"Houve interferência em ondas de rádio (AM/FM), pane em arquivos digitais ou alteração de bússola?"</button>
+                        <button onclick="enviarPerguntaChat('p3')" class="btn-diag">"Qual o odor predominante e qual o comportamento dos sensores térmicos no ambiente?"</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABA 4: MURAL DE EVIDÊNCIAS -->
+            <section id="aba-evidencias" class="tab-content">
+                <h2>📌 MURAL DE CONEXÕES PARANORMAIS</h2>
+                <div class="mural-board">
+                    <div class="pin-node" style="top: 30px; left: 40px;" onclick="conectarPonto(this, 'Mimetismo vocal / Eco imperfeito')">📌 Pista Vocal</div>
+                    <div class="pin-node" style="top: 30px; right: 40px;" onclick="conectarPonto(this, 'Anomalia física / Deformação de carcaça')">📌 Evidência Física</div>
+                    <div class="pin-node" style="top: 130px; left: 200px;" onclick="conectarPonto(this, 'Contaminação por gás / Monóxido de Carbono')">📌 Fator Químico</div>
+                    <div class="pin-node" style="top: 130px; right: 200px;" onclick="conectarPonto(this, 'Geometria não-euclidiana / Loop de salas')">📌 Distorção Espacial</div>
+                </div>
+                <div id="mural-log" class="mural-log">Selecione nós para formar e validar hipóteses táticas.</div>
+            </section>
+
+            <!-- ABA 5: DOSSIÊ AVANÇADO -->
+            <section id="aba-dossie" class="tab-content">
+                <h2>📰 DOSSIÊ TÁTICO AVANÇADO DE ANOMALIAS</h2>
+                <div class="dossie-grid">
+                    <article class="especie-card border-red">
+                        <h3>01. SKINWALKER (Muda-Peles / Metamorfo)</h3>
+                        <p class="tag">Origem: Lendas Nativas / Florestas Rurais</p>
+                        <p><strong>Sinais no Laboratório:</strong> Áudio revela frequências sobrepostas imitando vozes humanas. Leituras térmicas indicam corpo quente (38°C) em movimento quadrúpede disforme. Odor forte de decomposição.</p>
+                        <p><strong>Protocolo:</strong> Isolamento Acústico + Incinerador de Incidente.</p>
+                    </article>
+
+                    <article class="especie-card border-purple">
+                        <h3>02. CREEPYPASTA DIGITAL (Entidade de Dados)</h3>
+                        <p class="tag">Origem: Redes / Mídias Corrompidas / BIOS</p>
+                        <p><strong>Sinais no Laboratório:</strong> Áudio apresenta estática binária contínua. Leitura térmica nula (0°C de variação física). Provoca travamentos em hardware e induz transtornos cognitivos por tela.</p>
+                        <p><strong>Protocolo:</strong> Purge de Servidor & Firewall Profundo.</p>
+                    </article>
+
+                    <article class="especie-card border-blue">
+                        <h3>03. ENTIDADE ESPIRITUAL (Poltergeist / Aparição)</h3>
+                        <p class="tag">Origem: Locais de Trauma Histórico</p>
+                        <p><strong>Sinais no Laboratório:</strong> Leitura térmica indica PONTO DE CONGELAMENTO SEVERO (-10°C a -15°C localizados). Atividade telecinética alta. Sem rastro biológico.</p>
+                        <p><strong>Protocolo:</strong> Quarentena Térmica & Selamento Salino.</p>
+                    </article>
+
+                    <article class="especie-card border-yellow">
+                        <h3>04. CRÍPTIDO DE CAMPO (Predador Biológico)</h3>
+                        <p class="tag">Origem: Espécies Mutantes / Biologia Silvestre</p>
+                        <p><strong>Sinais no Laboratório:</strong> Leitura térmica biológica constante. Rastro físico tangível (pelos, sangue, pegadas). Ataques diretos a carcaças de animais de fazenda.</p>
+                        <p><strong>Protocolo:</strong> Isolamento Acústico + Incinerador de Incidente.</p>
+                    </article>
+
+                    <article class="especie-card border-purple">
+                        <h3>05. ANOMALIA LIMINAR / ESPACIAL (Distorção Geométrica)</h3>
+                        <p class="tag">Origem: Falhas na Estrutura do Espaço-Tempo</p>
+                        <p><strong>Sinais no Laboratório:</strong> Áudio captura ecos infinitos e reversão de frequência. Variações térmicas flutuam sem padrão. Locais trancados em loops espaciais e corredores sem fim.</p>
+                        <p><strong>Protocolo:</strong> Bloqueador Amnésico B-4 & Quarentena.</p>
+                    </article>
+
+                    <article class="especie-card border-red">
+                        <h3>06. CONTÁGIO COGNITIVO / MEME MALDITO (Ideia Infectante)</h3>
+                        <p class="tag">Origem: Símbolos / Textos Criptografados / Áudios Indutores</p>
+                        <p><strong>Sinais no Laboratório:</strong> Padrões de frequência que induzem paranoia crônica e repetição de palavras. Afeta o cérebro das vítimas sem necessidade de presença física ou monóxido de carbono.</p>
+                        <p><strong>Protocolo:</strong> Bloqueador Amnésico B-4 & Quarentena.</p>
+                    </article>
+
+                    <article class="especie-card border-green">
+                        <h3>07. FALSO ALARME (Causa Química, Fisiológica ou Natural)</h3>
+                        <p class="tag">Origem: Vazamentos de Monóxido de Carbono / Plantas Tóxicas</p>
+                        <p><strong>Sinais no Laboratório:</strong> Leitura de gases aponta contaminação por Monóxido de Carbono (CO) ou ingestão de plantas alucinógenas. Temperatura ambiente normal.</p>
+                        <p><strong>Protocolo:</strong> Ventilação Forçada & Evacuação Médica.</p>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div id="feedback-painel" class="feedback-painel">SISTEMA OPERACIONAL PRONTO.</div>
+            <div class="placar">PONTUAÇÃO: <span id="pontuacao-val" class="highlight-green">0</span></div>
+        </footer>
+    </div>
+
+    <!-- TELA FINAL -->
+    <div id="tela-final" class="lobby-container" style="display: none;">
+        <div class="capa-box">
+            <div class="carimbo-secreto" style="border-color: #33ff66; color: #33ff66;">CONCLUÍDO // NÍVEL ABSOLUTO</div>
+            <h1 class="titulo-capa" style="color: #ffff33;">MISSÃO DEVASTADORA CUMPRIDA</h1>
+            <h2 class="subtitulo-capa">TODAS AS 60 ANOMALIAS DAS 12 FASES FORAM CONTIDAS</h2>
+            
+            <p class="descricao-capa" style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 25px;">
+                Incrível, <strong>AGENTE-709</strong>! Você investigou e neutralizou todos os 60 relatórios das 12 fases da Agência S.I.P., sobreviveu ao Void Absoluto e tornou-se a maior lenda forense do departamento!
+            </p>
+
+            <div class="resultado-final-box">
+                <h3>PONTUAÇÃO FINAL TOTAL: <span id="pontuacao-final-val" style="color: #ffff33;">0</span> PTS</h3>
+            </div>
+
+            <button onclick="voltarAoLobbyDoFinal()" class="btn-iniciar-lobby" style="margin-top: 15px;">🔄 VOLTAR AO SELETOR PRINCIPAL</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
